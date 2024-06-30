@@ -12,12 +12,12 @@ load_last_grid = False
 train = True
 
 def save_q_table(q_table, filename='training_robot.pkl'):
-    """Salva a Q-table em um arquivo"""
+    #Salva o treinamento em um arquivo
     with open(filename, 'wb') as f:
         pickle.dump(q_table, f)
 
 def load_q_table(filename='training_robot.pkl'):
-    """Carrega a Q-table de um arquivo"""
+    #Carrega o treinamento
     try:
         with open(filename, 'rb') as f:
             return pickle.load(f)
@@ -34,7 +34,7 @@ if train:
 else:
     q_table = load_q_table(q_table_file)
     if q_table is None:
-        print("Erro: Arquivo de treinamento não encontrado. Execute o treinamento primeiro.")
+        print("Erro: Arquivo de treinamento nao encontrado. Execute o treinamento primeiro.")
         sys.exit()
 
 if train:
@@ -147,7 +147,7 @@ while not done:
 # Mostra o estado final e a razão da finalização
 print(f"Estado Final: {state}")
 print(f"Presentes Coletados: {len(collected_supplies)} de {len(env.supply_states)}")
-print(f"Movimentos Necessários: {move_count}")
+print(f"Movimentos Necessarios: {move_count}")
 print(f"Status: {reason}")
 
 # Fecha a janela do Pygame corretamente

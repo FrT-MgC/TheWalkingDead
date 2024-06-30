@@ -27,7 +27,7 @@ class GridGenerate:
             self.grid[i][j] = 3
 
     def _generate_random_grid(self):
-        """Gera posições aleatórias para zumbis, suprimentos e obstáculos"""
+        #Gera posições aleatórias para zumbis, suprimentos e obstáculos
         num_zombies = random.randint(1, self.size * self.size // 4)
         num_supplies = random.randint(1, self.size * self.size // 4)
         num_obstacles = random.randint(1, self.size * self.size // 8)
@@ -37,7 +37,7 @@ class GridGenerate:
         self.obstacle_states = self._place_random_items(num_obstacles, exclude=self.zombie_states + self.supply_states)
 
     def _place_random_items(self, num_items, exclude=[]):
-        """Coloca itens aleatórios no grid, excluindo certas posições"""
+        #Coloca itens aleatórios no grid, excluindo certas posições
         items = []
         while len(items) < num_items:
             i, j = random.randint(0, self.size - 1), random.randint(0, self.size - 1)
@@ -46,7 +46,7 @@ class GridGenerate:
         return items
 
     def _save_grid(self):
-        """Salva o grid gerado em um arquivo"""
+        #Salva o grid gerado em um arquivo
         grid_data = {
             'zombie_states': self.zombie_states,
             'supply_states': self.supply_states,
@@ -56,7 +56,7 @@ class GridGenerate:
             pickle.dump(grid_data, f)
 
     def _load_grid(self):
-        """Carrega o grid de um arquivo"""
+        #Carrega o grid de um arquivo
         try:
             with open('last_grid.pkl', 'rb') as f:
                 grid_data = pickle.load(f)
@@ -65,13 +65,13 @@ class GridGenerate:
             return None
 
     def reset(self):
-        """Reseta o estado atual e os suprimentos coletados"""
+        #Reseta o estado atual e os suprimentos coletados
         self.current_state = self.start_state
         self.supplies_collected = set()
         return self.current_state, tuple(self.supplies_collected)
 
     def step(self, action):
-        """Executa uma ação e retorna o novo estado, suprimentos coletados, recompensa, se terminou e a razão"""
+        #Executa uma ação e retorna o novo estado, suprimentos coletados, recompensa, se terminou e a razão
         i, j = self.current_state
         if action == 0:  # move up
             i = max(i - 1, 0)
@@ -91,7 +91,7 @@ class GridGenerate:
         # Avalia as condições de término e recompensa
         if self.current_state == self.goal_state:
             if len(self.supplies_collected) == len(self.supply_states):
-                reward, done, reason = 1, True, "Chegou ao objetivo após coletar todos os presentes"
+                reward, done, reason = 1, True, "Chegou ao objetivo apos coletar todos os presentes"
             else:
                 reward, done, reason = -0.1, True, "Chegou ao objetivo sem coletar todos os presentes"
         elif self.current_state in self.zombie_states:
@@ -105,7 +105,7 @@ class GridGenerate:
         return self.current_state, tuple(self.supplies_collected), reward, done, reason
 
     def render(self, screen, cell_size=60):
-        """Renderiza o grid utilizando pygame"""
+        #Renderiza o grid utilizando pygame
         colors = {
             "background": (80, 167, 56),
             "agent": (30, 146, 212),
