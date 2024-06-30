@@ -7,7 +7,7 @@ from environment_generator import GridGenerate
 training_quantity = 10000
 size = 10
 # Utilizar o último grid gerado
-load_last_grid = True
+load_last_grid = False
 # Fazer o treino ou utilizar o arquivo
 train = True
 
@@ -100,7 +100,7 @@ if train:
 
         # Mostra progresso a cada 1000 episódios
         if episode % 1000 == 0:
-            print(f'Episode: {episode}')
+            print(f'Treinando: {episode}')
 
     # Salva a Q-table treinada
     save_q_table(q_table, q_table_file)
