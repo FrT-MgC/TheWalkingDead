@@ -5,7 +5,7 @@ import sys
 from environment_generator import GridGenerate
 
 training_quantity = 10000
-size = 10
+size = 15
 # Utilizar o último grid gerado
 load_last_grid = False
 # Fazer o treino ou utilizar o arquivo
@@ -52,13 +52,17 @@ if train:
         # Converte os suprimentos coletados para um índice binário
         supply_index = int(''.join(['1' if (i, j) in collected_supplies else '0' for (i, j) in env.supply_states]), 2)
         state_action = (state, supply_index)
+            # Probabilidade de exploration ou explotation
         if random.uniform(0, 1) < epsilon:
+            # exploration: Escolhe uma ação aleatória
             return random.randint(0, 3)
         else:
+            # explotation: Escolhe a melhor ação com base na Q-table
             if state_action in q_table:
                 return np.argmax(q_table[state_action])
             else:
                 return random.randint(0, 3)
+        
 
     # Treina o agente
     for episode in range(num_episodes):
@@ -108,7 +112,14 @@ if train:
 # Inicializa o Pygame após o treinamento
 import pygame
 pygame.init()
-cell_size = 60
+
+if size <= 12:
+    cell_size = 60
+else:
+    cell_size = 100 - (size * 4)
+    if cell_size <= 0:
+       cell_size = 20
+
 screen = pygame.display.set_mode((env.size * cell_size, env.size * cell_size))
 pygame.display.set_caption('The Walking Dead')
 
