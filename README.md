@@ -2,4 +2,4 @@
 
 Algoritmo de reinforcement learning feitado para a disciplina de IA
 
-Execute o arquivo train.py para inicar
+Execute o arquivo train.py para iniciar
