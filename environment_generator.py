@@ -81,7 +81,6 @@ class GridGenerate:
         
         self.current_state = (i, j)
         
-        #verifica as recompesas pelas acoes
         if self.current_state == self.goal_state:
             if len(self.supplies_collected) == len(self.supply_states):
                 reward, done, reason = 1, True, "Chegou ao objetivo apos coletar todos os presentes"
