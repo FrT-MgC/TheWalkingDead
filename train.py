@@ -5,7 +5,7 @@ import sys
 from environment_generator import GridGenerate
 
 training_quantity = 10000
-size = 15
+size = 10
 #carregar ultimo grid
 load_last_grid = False
 #executar o treinamento
@@ -106,6 +106,7 @@ else:
 screen = pygame.display.set_mode((env.size * cell_size, env.size * cell_size))
 pygame.display.set_caption('The Walking Dead')
 
+#executa o caso de teste
 state, collected_supplies = env.reset()
 done = False
 move_count = 0
